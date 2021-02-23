@@ -6,6 +6,25 @@
 - file
 - new flutter project
 - flutter application
+import 'package:flutter/material.dart';
+
+// The main function is the starting point for all Flutter apps
+void main() {
+  runApp(
+    MaterialApp(
+      home: Scaffold(
+        backgroundColor: Colors.blueGrey,
+        appBar: AppBar(
+          title: Text('I Am Rich'),
+          backgroundColor: Colors.blueGrey[900],
+        ),
+        body: Center(
+          child: Image(image: AssetImage('images/diamond.png')),
+        ),
+      ),
+    ),
+  );
+}
 - give your project a name
 - leave other fields as they are unless you want to change project location
 - set package name if you do not have a domain name tryt using your ownname.com
