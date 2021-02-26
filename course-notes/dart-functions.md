@@ -18,7 +18,19 @@
 
 `child: Image.asset('images/dice$leftDiceNumber.png'),`
 
-Allows the image number to change and therefor display a different image
+Allows the image number to change and therefore display a different image
 
+## Functions with an output
+
+```
+void main(){
+
+
+
+  }
+void myFunction(){
+  double pi = 3.14159;
+  pi * 2
+  }
 
 
