@@ -79,7 +79,9 @@ class StoryBrain {
     }
   }
 
-  void restart() {}
+  void restart() {
+    _storyNumber = 0;
+  }
 
 //TODO: Step 20 - Download the story plan here: https://drive.google.com/uc?export=download&id=1KU6EghkO9Hf2hRM0756xFHgNaZyGCou3
 
