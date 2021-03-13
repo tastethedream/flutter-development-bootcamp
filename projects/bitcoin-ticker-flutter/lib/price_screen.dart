@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'coin_data.dart';
 import 'package:flutter/cupertino.dart';
+import 'dart:io' show Platform;
 
 class PriceScreen extends StatefulWidget {
   @override
@@ -10,35 +11,69 @@ class PriceScreen extends StatefulWidget {
 class _PriceScreenState extends State<PriceScreen> {
   String selectedCurrency = 'USD';
 
-  List<DropdownMenuItem> getDropdownItems() {
+  DropdownButton<String> androidDropdown() {
     List<DropdownMenuItem<String>> dropdownItems = [];
 
     for (String currency in currenciesList) {
-      // for (int i = 0; i < currenciesList.length; i++) {
-      //   String currency = (currenciesList[i]);
-
       var newItem = DropdownMenuItem(
         child: Text(currency),
         value: currency,
       );
       dropdownItems.add(newItem);
     }
-    return dropdownItems;
+
+    return DropdownButton<String>(
+      value: selectedCurrency,
+      items: dropdownItems,
+      onChanged: (value) {
+        setState(() {
+          selectedCurrency = value;
+        });
+      },
+    );
   }
 
-  List<Text> getPickerItems() {
+  CupertinoPicker iosPicker() {
     List<Text> pickerItems = [];
 
     for (String currency in currenciesList) {
       pickerItems.add(Text(currency));
     }
 
-    return pickerItems;
+    return CupertinoPicker(
+      itemExtent: 32.0,
+      onSelectedItemChanged: (selectedIndex) {
+        print(selectedIndex);
+      },
+      children: pickerItems,
+    );
+  }
+
+//12. Create a variable to hold the value and use in our Text Widget. Give the variable a starting value of '?' before the data comes back from the async methods.
+  String bitcoinValueInUSD = '?';
+
+  //11. Create an async method here await the coin data from coin_data.dart
+  void getData() async {
+    try {
+      double data = await CoinData().getCoinData();
+      //13. We can't await in a setState(). So you have to separate it out into two steps.
+      setState(() {
+        bitcoinValueInUSD = data.toStringAsFixed(0);
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    //14. Call getData() when the screen loads up. We can't call CoinData().getCoinData() directly here because we can't make initState() async.
+    getData();
   }
 
   @override
   Widget build(BuildContext context) {
-    getDropdownItems();
     return Scaffold(
       appBar: AppBar(
         title: Text('🤑 Coin Ticker'),
@@ -58,7 +93,7 @@ class _PriceScreenState extends State<PriceScreen> {
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
                 child: Text(
-                  '1 BTC = ? USD',
+                  '1 BTC = $bitcoinValueInUSD USD',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 20.0,
@@ -73,25 +108,10 @@ class _PriceScreenState extends State<PriceScreen> {
             alignment: Alignment.center,
             padding: EdgeInsets.only(bottom: 30.0),
             color: Colors.lightBlue,
-            child: CupertinoPicker(
-              itemExtent: 32.0,
-              onSelectedItemChanged: (selectedIndex) {
-                print(selectedIndex);
-              },
-              children: getPickerItems(),
-            ),
+            child: Platform.isIOS ? iosPicker() : androidDropdown(),
           ),
         ],
       ),
     );
   }
 }
-
-// DropdownButton<String>(
-// value: selectedCurrency,
-// items: getDropdownItems(),
-// onChanged: (value) {
-// setState(() {
-// selectedCurrency = value;
-// });
-// }),
