@@ -76,6 +76,40 @@ class MyApp extends StatelessWidget {
 ```
 
 
+ ## Using id's for routes
+
+- Set an id for each screen
+
+` static String id = 'chat_screen';`
+
+- Set routes in `main.dart`
+
+```
+      home: WelcomeScreen(),
+      initialRoute: WelcomeScreen.id,
+      routes: {
+        WelcomeScreen.id: (context) => WelcomeScreen(),
+        LoginScreen.id: (context) => LoginScreen(),
+        RegistrationScreen.id: (context) => RegistrationScreen(),
+        ChatScreen.id: (context) => ChatScreen(),
+      },
+    );
+  }
+}
+```
+
+- Add to your `onPressed()`
+
+```
+  child: MaterialButton(
+      onPressed: () {
+      //Go to registration screen.
+      Navigator.pushNamed(context, RegistrationScreen.id);
+     },
+
+```                  
+
+
 
 
 
