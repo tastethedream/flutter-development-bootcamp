@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "768997075503",
+    "project_id": "flash-chat-c6b6d",
+    "storage_bucket": "flash-chat-c6b6d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:768997075503:android:c1baf09a6a9a3fa51474da",
+        "android_client_info": {
+          "package_name": "co.DawnRose.flash_chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "768997075503-d84djud5f3e9b474hgvqnhi62775d8nu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKWewHuMKyb9NzlIlsKBuUTajalvEkP7c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "768997075503-d84djud5f3e9b474hgvqnhi62775d8nu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
