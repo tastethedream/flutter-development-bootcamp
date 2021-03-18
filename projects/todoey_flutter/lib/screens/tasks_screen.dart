@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:todoey_flutter/widgets/tasks_list.dart';
+import 'package:todoey_flutter/screens/add_task_screen.dart';
 
 // Task screen main widget- contains styling and structure for the top half of this page
 
 class TasksScreen extends StatelessWidget {
+  // Function for building bottom sheet
+  Widget buildBottomSheet;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -10,6 +15,14 @@ class TasksScreen extends StatelessWidget {
         floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.lightGreenAccent,
           child: Icon(Icons.add),
+          onPressed: () {
+            // create bottom sheet when pressed and call buildBottomSheet()
+            showModalBottomSheet(
+              context: context,
+              builder: (context) => AddTaskScreen(),
+              backgroundColor: Colors.transparent,
+            );
+          },
         ),
         //wrap container in another column so that the expanded widget for the bottom half
         // of the screen can sit outside the the column with the padding and therefore have no padding
@@ -53,9 +66,10 @@ class TasksScreen extends StatelessWidget {
                 ],
               ),
             ),
-            // Bottom part of screen for the list
             Expanded(
               child: Container(
+                //line up the list items with the text and icon above it
+                padding: EdgeInsets.symmetric(horizontal: 20.0),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   // round off the top corners of the container
@@ -64,6 +78,8 @@ class TasksScreen extends StatelessWidget {
                     topRight: Radius.circular(20.0),
                   ),
                 ),
+                // The List
+                child: TasksList(),
               ),
             )
           ],
