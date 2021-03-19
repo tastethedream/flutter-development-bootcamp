@@ -1,11 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:todoey_flutter/widgets/tasks_list.dart';
 import 'package:todoey_flutter/screens/add_task_screen.dart';
+import 'package:todoey_flutter/models/task.dart';
 
 // Task screen main widget- contains styling and structure for the top half of this page
 
-class TasksScreen extends StatelessWidget {
-  // Function for building bottom sheet
+class TasksScreen extends StatefulWidget {
+  @override
+  _TasksScreenState createState() => _TasksScreenState();
+}
+
+class _TasksScreenState extends State<TasksScreen> {
+  List<Task> tasks = [
+    Task(name: 'Water Plants'),
+    Task(name: 'Mow Lawn'),
+    Task(name: 'Weed Flowerbeds'),
+  ];
+
   Widget buildBottomSheet;
 
   @override
@@ -20,7 +31,13 @@ class TasksScreen extends StatelessWidget {
             showModalBottomSheet(
               context: context,
               isScrollControlled: true,
-              builder: (context) => AddTaskScreen(),
+              builder: (context) => AddTaskScreen((newTaskTitle) {
+                setState(() {
+                  tasks.add(Task(name: newTaskTitle));
+                });
+                //remove the bottom sheet after adding new list item
+                Navigator.pop(context);
+              }),
               backgroundColor: Colors.transparent,
             );
           },
@@ -58,7 +75,8 @@ class TasksScreen extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '12 Tasks',
+                    //display the number of tasks under the app title
+                    '${tasks.length} Tasks',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 18.0,
@@ -80,7 +98,7 @@ class TasksScreen extends StatelessWidget {
                   ),
                 ),
                 // The List
-                child: TasksList(),
+                child: TasksList(tasks),
               ),
             )
           ],

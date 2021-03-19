@@ -25,10 +25,3 @@ class TaskTile extends StatelessWidget {
     );
   }
 }
-
-// TaskCheckbox(
-// checkboxState: isChecked,
-// toggleCheckboxState:
-// ),
-
-// extracted widget for the checkboxes
