@@ -19,6 +19,7 @@ class TasksScreen extends StatelessWidget {
             // create bottom sheet when pressed and call buildBottomSheet()
             showModalBottomSheet(
               context: context,
+              isScrollControlled: true,
               builder: (context) => AddTaskScreen(),
               backgroundColor: Colors.transparent,
             );
